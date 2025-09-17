@@ -51,7 +51,7 @@ fun SplashScreen(
             )
 
             CustomButton(
-                text = "Começar",
+                text = "Get Started",
                 onClick = onStartClick,
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             )

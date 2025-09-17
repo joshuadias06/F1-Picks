@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.terminal.f1picks.ui.theme.F1FontFamily
 import com.terminal.f1picks.ui.theme.F1PicksTheme
 import com.terminal.f1picks.ui.theme.White
@@ -39,9 +40,10 @@ fun CustomButton(
         modifier = modifier
             .padding(horizontal = 32.dp)
             .fillMaxWidth()
-            .background(brush = gradient, shape = RoundedCornerShape(16.dp))
+            .background(brush = gradient, shape = RoundedCornerShape(25.dp))
     ) {
         Text(
+            fontSize = 26.sp,
             fontFamily = F1FontFamily,
             fontWeight = FontWeight.Normal,
             text = text,

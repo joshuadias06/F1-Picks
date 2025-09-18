@@ -1,4 +1,4 @@
-package com.terminal.f1picks.presentation.login
+package com.terminal.f1picks.presentation.register
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -27,14 +27,17 @@ import com.terminal.f1picks.ui.theme.F1PicksTheme
 import com.terminal.f1picks.ui.theme.White
 
 @Composable
-fun LoginScreenMinimal(
-    onLoginClick: () -> Unit,
+fun RegisterScreen(
     onRegisterClick: () -> Unit,
-    onForgotPasswordClick: () -> Unit,
+    onBackToLoginClick: () -> Unit,
     onGoogleClick: () -> Unit
 ) {
+    var name by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
+    var phone by remember { mutableStateOf("") }
+    var cpf by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    var termsAccepted by remember { mutableStateOf(false) }
 
     Box(
         modifier = Modifier
@@ -58,19 +61,37 @@ fun LoginScreenMinimal(
                 .fillMaxSize()
                 .padding(horizontal = 24.dp)
         ) {
-            Spacer(modifier = Modifier.height(48.dp))
+            Spacer(modifier = Modifier.height(2.dp))
 
             // Logo
             Image(
                 painter = painterResource(id = R.drawable.logo),
                 contentDescription = "App Logo",
-                modifier = Modifier
-                    .size(220.dp)
+                modifier = Modifier.size(220.dp)
             )
 
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(2.dp))
 
-            // Email input
+            // Nome
+            OutlinedTextField(
+                value = name,
+                onValueChange = { name = it },
+                placeholder = { Text("Name", color = White.copy(alpha = 0.5f)) },
+                singleLine = true,
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = White.copy(alpha = 0.6f),
+                    unfocusedBorderColor = White.copy(alpha = 0.3f),
+                    cursorColor = White
+                ),
+                shape = RoundedCornerShape(12.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(50.dp)
+            )
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            // Email
             OutlinedTextField(
                 value = email,
                 onValueChange = { email = it },
@@ -88,9 +109,49 @@ fun LoginScreenMinimal(
                     .height(50.dp)
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(12.dp))
 
-            // Password input
+            // Celular
+            OutlinedTextField(
+                value = phone,
+                onValueChange = { phone = it },
+                placeholder = { Text("Phone", color = White.copy(alpha = 0.5f)) },
+                singleLine = true,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = White.copy(alpha = 0.6f),
+                    unfocusedBorderColor = White.copy(alpha = 0.3f),
+                    cursorColor = White
+                ),
+                shape = RoundedCornerShape(12.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(50.dp)
+            )
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            // CPF
+            OutlinedTextField(
+                value = cpf,
+                onValueChange = { cpf = it },
+                placeholder = { Text("CPF", color = White.copy(alpha = 0.5f)) },
+                singleLine = true,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = White.copy(alpha = 0.6f),
+                    unfocusedBorderColor = White.copy(alpha = 0.3f),
+                    cursorColor = White
+                ),
+                shape = RoundedCornerShape(12.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(50.dp)
+            )
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            // Senha
             OutlinedTextField(
                 value = password,
                 onValueChange = { password = it },
@@ -109,15 +170,37 @@ fun LoginScreenMinimal(
                     .height(50.dp)
             )
 
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Checkbox termos
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Checkbox(
+                    checked = termsAccepted,
+                    onCheckedChange = { termsAccepted = it },
+                    colors = CheckboxDefaults.colors(
+                        checkedColor = White,
+                        uncheckedColor = White.copy(alpha = 0.5f)
+                    )
+                )
+                Text(
+                    text = "I accept the Terms and Conditions",
+                    color = White.copy(alpha = 0.7f),
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            }
+
             Spacer(modifier = Modifier.height(24.dp))
 
-            // Botão de Login minimalista
+            // Botão de Registrar
             CustomButtonMinimal(
-                text = "Login",
-                onClick = onLoginClick,
+                text = "Register",
+                onClick = onRegisterClick,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(50.dp)
+                    .height(50.dp),
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -142,29 +225,17 @@ fun LoginScreenMinimal(
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.icon_google),
-                    contentDescription = "Login with Google",
+                    contentDescription = "Register with Google",
                     modifier = Modifier.size(36.dp)
                 )
             }
 
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(24.dp))
 
-            // Registro clean
-            TextButton(onClick = onRegisterClick) {
+            // Voltar para login
+            TextButton(onClick = onBackToLoginClick) {
                 Text(
-                    text = "Don't have an account? Register",
-                    color = White.copy(alpha = 0.6f),
-                    style = MaterialTheme.typography.bodyLarge,
-                    textAlign = TextAlign.Center
-                )
-            }
-
-            Spacer(modifier = Modifier.height(12.dp))
-
-            // Forgot password
-            TextButton(onClick = onForgotPasswordClick) {
-                Text(
-                    "Forgot Password?",
+                    text = "Already have an account? Login",
                     color = White.copy(alpha = 0.6f),
                     style = MaterialTheme.typography.bodyLarge,
                     textAlign = TextAlign.Center
@@ -176,12 +247,11 @@ fun LoginScreenMinimal(
 
 @Preview(showSystemUi = true)
 @Composable
-fun LoginScreenMinimalPreview() {
+fun RegisterScreenMinimalPreview() {
     F1PicksTheme {
-        LoginScreenMinimal(
-            onLoginClick = {},
+        RegisterScreen(
             onRegisterClick = {},
-            onForgotPasswordClick = {},
+            onBackToLoginClick = {},
             onGoogleClick = {}
         )
     }

@@ -22,6 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.terminal.f1picks.R
 import com.terminal.f1picks.presentation.components.CustomButtonMinimal
+import com.terminal.f1picks.presentation.components.CustomInputField
 import com.terminal.f1picks.ui.theme.DarkPetrolBlue
 import com.terminal.f1picks.ui.theme.F1PicksTheme
 import com.terminal.f1picks.ui.theme.White
@@ -72,102 +73,43 @@ fun RegisterScreen(
 
             Spacer(modifier = Modifier.height(2.dp))
 
-            // Nome
-            OutlinedTextField(
+            CustomInputField(
                 value = name,
                 onValueChange = { name = it },
-                placeholder = { Text("Name", color = White.copy(alpha = 0.5f)) },
-                singleLine = true,
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = White.copy(alpha = 0.6f),
-                    unfocusedBorderColor = White.copy(alpha = 0.3f),
-                    cursorColor = White
-                ),
-                shape = RoundedCornerShape(12.dp),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(50.dp)
+                placeholder = "Name"
             )
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            // Email
-            OutlinedTextField(
+            CustomInputField(
                 value = email,
                 onValueChange = { email = it },
-                placeholder = { Text("Email", color = White.copy(alpha = 0.5f)) },
-                singleLine = true,
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = White.copy(alpha = 0.6f),
-                    unfocusedBorderColor = White.copy(alpha = 0.3f),
-                    cursorColor = White
-                ),
-                shape = RoundedCornerShape(12.dp),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(50.dp)
+                placeholder = "Email"
             )
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            // Celular
-            OutlinedTextField(
+            CustomInputField(
                 value = phone,
                 onValueChange = { phone = it },
-                placeholder = { Text("Phone", color = White.copy(alpha = 0.5f)) },
-                singleLine = true,
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = White.copy(alpha = 0.6f),
-                    unfocusedBorderColor = White.copy(alpha = 0.3f),
-                    cursorColor = White
-                ),
-                shape = RoundedCornerShape(12.dp),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(50.dp)
+                placeholder = "Phone",
             )
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            // CPF
-            OutlinedTextField(
+            CustomInputField(
                 value = cpf,
                 onValueChange = { cpf = it },
-                placeholder = { Text("CPF", color = White.copy(alpha = 0.5f)) },
-                singleLine = true,
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = White.copy(alpha = 0.6f),
-                    unfocusedBorderColor = White.copy(alpha = 0.3f),
-                    cursorColor = White
-                ),
-                shape = RoundedCornerShape(12.dp),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(50.dp)
+                placeholder = "CPF"
             )
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            // Senha
-            OutlinedTextField(
+            CustomInputField(
                 value = password,
                 onValueChange = { password = it },
-                placeholder = { Text("Password", color = White.copy(alpha = 0.5f)) },
-                singleLine = true,
-                visualTransformation = PasswordVisualTransformation(),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = White.copy(alpha = 0.6f),
-                    unfocusedBorderColor = White.copy(alpha = 0.3f),
-                    cursorColor = White
-                ),
-                shape = RoundedCornerShape(12.dp),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(50.dp)
+                placeholder = "Password",
+                visualTransformation = PasswordVisualTransformation()
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -247,7 +189,7 @@ fun RegisterScreen(
 
 @Preview(showSystemUi = true)
 @Composable
-fun RegisterScreenMinimalPreview() {
+fun RegisterScreenPreview() {
     F1PicksTheme {
         RegisterScreen(
             onRegisterClick = {},

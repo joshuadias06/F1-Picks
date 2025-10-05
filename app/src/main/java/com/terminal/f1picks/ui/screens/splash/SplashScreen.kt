@@ -1,4 +1,4 @@
-package com.terminal.f1picks.presentation.splash
+package com.terminal.f1picks.ui.screens.splash
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -12,7 +12,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.terminal.f1picks.R
-import com.terminal.f1picks.presentation.components.CustomButton
+import com.terminal.f1picks.ui.components.CustomButton
 import com.terminal.f1picks.ui.theme.DarkPetrolBlue
 import com.terminal.f1picks.ui.theme.F1PicksTheme
 

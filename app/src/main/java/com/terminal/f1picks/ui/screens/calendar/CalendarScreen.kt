@@ -1,4 +1,4 @@
-package com.terminal.f1picks.presentation.calendar
+package com.terminal.f1picks.ui.screens.calendar
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -7,12 +7,14 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBackIosNew
-import androidx.compose.material.icons.filled.ArrowForwardIos
+import androidx.compose.material.icons.filled.KeyboardDoubleArrowRight
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -32,7 +34,7 @@ data class Race(
 
 @Composable
 fun CalendarScreen(races: List<Race>) {
-    var selectedRaceIndex by remember { mutableStateOf(0) }
+    var selectedRaceIndex by remember { mutableIntStateOf(0) }
 
     Box(
         modifier = Modifier
@@ -82,7 +84,7 @@ fun CalendarScreen(races: List<Race>) {
                         Text(
                             text = races[selectedRaceIndex].trackName,
                             color = White,
-                            style = MaterialTheme.typography.titleMedium
+                            style = MaterialTheme.typography.titleMedium.copy()
                         )
                     }
                 }
@@ -91,7 +93,7 @@ fun CalendarScreen(races: List<Race>) {
                     onClick = { if (selectedRaceIndex < races.size - 1) selectedRaceIndex++ }
                 ) {
                     Icon(
-                        imageVector = Icons.Filled.ArrowForwardIos,
+                        imageVector = Icons.Filled.KeyboardDoubleArrowRight,
                         contentDescription = "Next Race",
                         tint = White
                     )
@@ -100,30 +102,53 @@ fun CalendarScreen(races: List<Race>) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Track Image Card
+            // Track Image Card (maior e aproveitando melhor a área)
             Card(
                 shape = RoundedCornerShape(12.dp),
                 colors = CardDefaults.cardColors(containerColor = Color.Transparent),
                 border = BorderStroke(1.dp, White.copy(alpha = 0.7f)),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(180.dp)
+                    .height(320.dp) // altura maior para dar mais destaque
             ) {
-                Image(
-                    painter = painterResource(id = races[selectedRaceIndex].trackImage),
-                    contentDescription = "Track Image",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier.fillMaxSize()
-                )
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Image(
+                        painter = painterResource(id = races[selectedRaceIndex].trackImage),
+                        contentDescription = "Track Image",
+                        contentScale = ContentScale.Fit,
+                        modifier = Modifier
+                            .fillMaxWidth(0.85f)
+                            .fillMaxHeight(0.85f)
+                            .graphicsLayer {
+                                rotationZ = 45f
+                            },
+                        colorFilter = ColorFilter.tint(White)
+                    )
+                }
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(20.dp))
 
             // Race Details
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                Text(text = "Date: ${races[selectedRaceIndex].date}", color = White)
-                Text(text = "Time: ${races[selectedRaceIndex].time}", color = White)
-                Text(text = "Location: ${races[selectedRaceIndex].location}", color = White)
+                Text(
+                    text = "Date: ${races[selectedRaceIndex].date}",
+                    color = White,
+                    style = MaterialTheme.typography.bodyLarge.copy()
+                )
+                Text(
+                    text = "Time: ${races[selectedRaceIndex].time}",
+                    color = White,
+                    style = MaterialTheme.typography.bodyLarge.copy()
+                )
+                Text(
+                    text = "Location: ${races[selectedRaceIndex].location}",
+                    color = White,
+                    style = MaterialTheme.typography.bodyLarge.copy()
+                )
             }
         }
     }

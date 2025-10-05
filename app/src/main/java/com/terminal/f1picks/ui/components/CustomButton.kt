@@ -1,4 +1,4 @@
-package com.terminal.f1picks.presentation.components
+package com.terminal.f1picks.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
